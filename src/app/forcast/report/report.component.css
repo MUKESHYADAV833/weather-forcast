@@ -1,0 +1,9 @@
+.modal-body-desg{
+    overflow: auto;
+    height: 60vh;
+}
+
+.modal-content{
+    background-color:#3597a7;
+    color: white;
+}

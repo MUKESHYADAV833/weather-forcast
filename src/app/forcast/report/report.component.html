@@ -1,0 +1,40 @@
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Weather Report</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body modal-body-desg">
+        <pre [innerHTML]="weatherDetails | common"></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" style="color: white;">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="copyToClipboard()"
+          title="copy"
+          #copyBtn style="color: white;"
+        >
+          <i class="bi bi-clipboard" *ngIf="handleCopyToggle"></i>
+          <!-- <i class="bi bi-clipboard-check" *ngIf="!handleCopyToggle"></i> -->
+          <i class="bi bi-clipboard" *ngIf="!handleCopyToggle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

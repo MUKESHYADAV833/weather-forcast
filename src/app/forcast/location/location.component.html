@@ -1,0 +1,115 @@
+<app-navbar></app-navbar>
+<div>
+    <div>
+       
+    </div>
+    <!-- card-display.component.html -->
+
+    <div class="card-container">
+        <div class="card1">
+            <!-- Card 1 content -->
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Select Country and State</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="countrySelect" class="mb-2">Country:</label>
+                            <select id="country" class="form-select" formControlName="country" (change)="changecountry()">
+                                <option value="">Select a country</option>
+                                <option *ngFor="let country of countries" [value]="country.id">
+                                    {{ country.name }}
+                                </option>
+                            </select>
+                            <div id="country-err" class="form-text"
+                                *ngIf="form?.get('country')?.touched && form?.get('country')?.errors?.['required']"
+                                style="color: red">
+                                Country is required.
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="stateSelect">State:</label>
+                            <select id="state" class="form-select" formControlName="state" >
+                                <option value="">Select a state</option>
+                                <option *ngFor="let state of states" [value]="state.id">
+                                    {{ state.name }}
+                                </option>
+                            </select>
+                            <div id="state-err" class="form-text"
+                                *ngIf="form?.get('state')?.touched && form?.get('state')?.errors?.['required']"
+                                style="color: red">
+                                State is required.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary" [disabled]="states.length == 0">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="card2">
+            <!-- Card 2 content -->
+            <div class="container weather-container" >
+                <div class="weather-main background-body">
+                    <div class="row background-body">
+                        <div class="col-4 card-container background-body">
+                            <div class="card-div">
+                                <div class="w-100">
+                                    <img [src]="
+                              'https://openweathermap.org/img/wn/' +
+                              JsonData?.weather[0]?.icon +
+                              '@4x.png'
+                            " alt="" />
+                                    <span style="font-size: 1.5rem;">{{
+                                        data["Weather Condition"] || "Detailed Description"
+            
+                                        }}</span>
+                                </div>
+            
+                                <div class="card-data-sec">
+                                    <div style="font-size: 5rem">
+                                        <span>
+                                            {{ data["Temperature"] || "0 °C" | uppercase }}
+                                        </span>
+                                    </div>
+            
+                                    <div style="font-size: 1.5rem">
+                                        <span>
+                                            {{
+                                            data["Location Name"] || "City"
+                                            }} </span>,&nbsp;
+                                        <span> {{ data["Country"] || "CC" | uppercase }} </span>
+                                    </div>
+            
+                                    <div style="font-size: 2rem">{{localDate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8 weather-table background-body">
+                            <table class="table table-borderless my-2 background-body table-desg">
+                                <tbody>
+                                    <tr *ngFor="let item of data | keyvalue">
+                                        <th scope="row">{{ item.key }}</th>
+                                        <td>{{ item.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="btn-div mx-2 my-2 background-body">
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    <i class="bi bi-eye-fill"></i> Weather Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<app-report [weatherDetails]="JsonData"></app-report>
